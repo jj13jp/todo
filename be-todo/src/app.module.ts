@@ -16,6 +16,7 @@ import { Todo } from "@/todo/entities/todo.entity"
       database: process.env.DB_NAME ?? "todo",
       entities: [Todo],
       synchronize: false,
+      ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false,
     }),
     TodoModule,
   ],
