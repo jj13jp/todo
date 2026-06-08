@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "JetBrains Mono", ui-monospace, monospace;
+	--font-display: "Cormorant Garamond", Georgia, serif;
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────────── */
+
+html,
+body {
+	background-color: #faf8f4;
+	color: #1a1612;
+	font-family: "JetBrains Mono", ui-monospace, monospace;
+	-webkit-font-smoothing: antialiased;
+	min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	font-family: inherit;
+	cursor: pointer;
+}
+
+/* ─── Layout ────────────────────────────────────────────────────────────── */
+
+.todo-root {
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 4rem 2rem 8rem;
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────── */
+
+.todo-header {
+	margin-bottom: 2.5rem;
+}
+
+.todo-header-top {
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.todo-title {
+	font-family: "Cormorant Garamond", Georgia, serif;
+	font-size: clamp(3.5rem, 10vw, 5.5rem);
+	font-weight: 300;
+	font-style: italic;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: #1a1612;
+}
+
+.todo-badge {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: #bf3c24;
+	background: #fdf1ee;
+	border: 1px solid #e8c4bc;
+	border-radius: 2px;
+	padding: 0.125rem 0.5rem;
+	letter-spacing: 0.06em;
+	line-height: 1.6;
+}
+
+.todo-rule {
+	height: 1px;
+	background-color: #1a1612;
+}
+
+/* ─── Create form ───────────────────────────────────────────────────────── */
+
+.todo-create {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 2.5rem;
+	border-bottom: 1px solid #ddd7cd;
+	padding-bottom: 0.125rem;
+}
+
+.todo-input {
+	flex: 1;
+	background: transparent;
+	border: none;
+	outline: none;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.875rem;
+	color: #1a1612;
+	padding: 0.625rem 0;
+	line-height: 1.5;
+}
+
+.todo-input::placeholder {
+	color: #c0b8b0;
+}
+
+.todo-submit {
+	background: none;
+	border: 1px solid #ddd7cd;
+	color: #9a9188;
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.25rem;
+	border-radius: 2px;
+	transition:
+		border-color 0.15s,
+		color 0.15s,
+		background 0.15s;
+	flex-shrink: 0;
+	line-height: 1;
+}
+
+.todo-submit:hover {
+	border-color: #bf3c24;
+	color: #bf3c24;
+	background: #fdf1ee;
+}
+
+.todo-submit:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+/* ─── Section ───────────────────────────────────────────────────────────── */
+
+.todo-section {
+	margin-bottom: 2.5rem;
+}
+
+.todo-section--done {
+	opacity: 0.55;
+}
+
+.todo-section-label {
+	font-size: 0.6875rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: #9a9188;
+	margin-bottom: 0.75rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid #ede8e1;
+}
+
+/* ─── List ──────────────────────────────────────────────────────────────── */
+
+.todo-list {
+	list-style: none;
+}
+
+/* ─── Item ──────────────────────────────────────────────────────────────── */
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.625rem 0;
+	border-bottom: 1px solid #ede8e1;
+	transition:
+		opacity 0.2s ease,
+		transform 0.2s ease;
+}
+
+@starting-style {
+	.todo-item {
+		opacity: 0;
+		transform: translateY(-6px);
+	}
+}
+
+.todo-item--pending {
+	opacity: 0.45;
+}
+
+/* ─── Number ────────────────────────────────────────────────────────────── */
+
+.todo-num {
+	font-size: 0.625rem;
+	color: #c8c0b8;
+	letter-spacing: 0.04em;
+	width: 1.5rem;
+	flex-shrink: 0;
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+	user-select: none;
+}
+
+/* ─── Checkbox ──────────────────────────────────────────────────────────── */
+
+.todo-check {
+	width: 1rem;
+	height: 1rem;
+	border: 1.5px solid #c8c0b8;
+	background: transparent;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		border-color 0.15s,
+		background 0.15s;
+	position: relative;
+	border-radius: 0;
+}
+
+.todo-check:hover {
+	border-color: #bf3c24;
+}
+
+.todo-check--on {
+	background: #bf3c24;
+	border-color: #bf3c24;
+}
+
+.todo-check--on::after {
+	content: "";
+	display: block;
+	width: 0.3rem;
+	height: 0.55rem;
+	border-right: 1.5px solid #fff;
+	border-bottom: 1.5px solid #fff;
+	transform: rotate(45deg) translate(-1px, -1px);
+}
+
+/* ─── Title ─────────────────────────────────────────────────────────────── */
+
+.todo-text {
+	flex: 1;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: #1a1612;
+}
+
+.todo-item--done .todo-text {
+	text-decoration: line-through;
+	text-decoration-color: #bf3c24;
+	text-decoration-thickness: 1px;
+	color: #9a9188;
+}
+
+/* ─── Delete ────────────────────────────────────────────────────────────── */
+
+.todo-del {
+	background: none;
+	border: none;
+	color: #c8c0b8;
+	font-size: 1rem;
+	opacity: 0;
+	transition:
+		color 0.15s,
+		opacity 0.15s;
+	padding: 0 0.25rem;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.todo-del:hover {
+	color: #bf3c24;
+}
+
+.todo-item:hover .todo-del {
+	opacity: 1;
+}
+
+/* ─── States ────────────────────────────────────────────────────────────── */
+
+.todo-empty {
+	font-size: 0.8125rem;
+	color: #c0b8b0;
+	padding: 1.25rem 0;
+	font-style: italic;
+}
+
+.todo-loading {
+	font-size: 0.8125rem;
+	color: #9a9188;
+	padding: 2rem 0;
+	letter-spacing: 0.04em;
+}
+
+.todo-error {
+	font-size: 0.8125rem;
+	color: #bf3c24;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid #e8c4bc;
+	background: #fdf1ee;
+	margin-bottom: 1.25rem;
+	border-radius: 2px;
+}

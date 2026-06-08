@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:18.4-bookworm
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+  backend:
+    build:
+      context: ./be-todo
+    environment:
+      DB_HOST: postgres
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./fe-todo
+      args:
+        - VITE_API_BASE_URL=http://localhost:3000
+    ports:
+      - 3001:80
+    depends_on:
+      - postgres
+      - backend
+
+volumes:
+  postgres_data:
