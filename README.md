@@ -2,6 +2,9 @@
 
 汎用的な TODO アプリ。Docker と Nest.js と デプロイ の練習用に作成・運用している。
 
+<https://todo-frontend-zjgf.onrender.com/>
+※バックエンドにrenderを使用しているため、起動には30~60秒の時間がかかる
+
 ## 構成
 
 - fe-todo: フロントエンドを実装するディレクトリ
