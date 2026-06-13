@@ -91,6 +91,7 @@ export default function Index() {
 					name="title"
 					className="todo-input"
 					placeholder="新しいタスクを追加..."
+					aria-label="タスク名"
 					autoComplete="off"
 					required
 				/>

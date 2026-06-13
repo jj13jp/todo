@@ -13,7 +13,7 @@ body {
 	color: #1a1612;
 	font-family: "JetBrains Mono", ui-monospace, monospace;
 	-webkit-font-smoothing: antialiased;
-	min-height: 100vh;
+	min-height: 100dvh;
 }
 
 *,
@@ -102,15 +102,15 @@ button {
 }
 
 .todo-input::placeholder {
-	color: #c0b8b0;
+	color: #9a9188;
 }
 
 .todo-submit {
 	background: none;
 	border: 1px solid #ddd7cd;
 	color: #9a9188;
-	width: 2rem;
-	height: 2rem;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -135,6 +135,20 @@ button {
 	cursor: not-allowed;
 }
 
+/* ─── Focus ─────────────────────────────────────────────────────────────── */
+
+.todo-input:focus-visible {
+	outline: 2px solid #bf3c24;
+	outline-offset: 2px;
+}
+
+.todo-submit:focus-visible,
+.todo-check:focus-visible,
+.todo-del:focus-visible {
+	outline: 2px solid #bf3c24;
+	outline-offset: 2px;
+}
+
 /* ─── Section ───────────────────────────────────────────────────────────── */
 
 .todo-section {
@@ -149,7 +163,7 @@ button {
 	font-size: 0.6875rem;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	color: #9a9188;
+	color: #706860;
 	margin-bottom: 0.75rem;
 	padding-bottom: 0.5rem;
 	border-bottom: 1px solid #ede8e1;
@@ -174,10 +188,21 @@ button {
 		transform 0.2s ease;
 }
 
-@starting-style {
-	.todo-item {
-		opacity: 0;
-		transform: translateY(-6px);
+@media (prefers-reduced-motion: no-preference) {
+	@starting-style {
+		.todo-item {
+			opacity: 0;
+			transform: translateY(-6px);
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.todo-item,
+	.todo-check,
+	.todo-submit,
+	.todo-del {
+		transition: none;
 	}
 }
 
@@ -189,7 +214,7 @@ button {
 
 .todo-num {
 	font-size: 0.625rem;
-	color: #c8c0b8;
+	color: #706860;
 	letter-spacing: 0.04em;
 	width: 1.5rem;
 	flex-shrink: 0;
@@ -214,6 +239,12 @@ button {
 		background 0.15s;
 	position: relative;
 	border-radius: 0;
+}
+
+.todo-check::before {
+	content: "";
+	position: absolute;
+	inset: -0.875rem;
 }
 
 .todo-check:hover {
@@ -262,7 +293,11 @@ button {
 	transition:
 		color 0.15s,
 		opacity 0.15s;
-	padding: 0 0.25rem;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	line-height: 1;
 	flex-shrink: 0;
 }
@@ -271,22 +306,30 @@ button {
 	color: #bf3c24;
 }
 
-.todo-item:hover .todo-del {
+.todo-item:hover .todo-del,
+.todo-del:focus-visible {
 	opacity: 1;
+}
+
+@media (pointer: coarse) {
+	.todo-del {
+		opacity: 1;
+		color: #706860;
+	}
 }
 
 /* ─── States ────────────────────────────────────────────────────────────── */
 
 .todo-empty {
 	font-size: 0.8125rem;
-	color: #c0b8b0;
+	color: #706860;
 	padding: 1.25rem 0;
 	font-style: italic;
 }
 
 .todo-loading {
 	font-size: 0.8125rem;
-	color: #9a9188;
+	color: #706860;
 	padding: 2rem 0;
 	letter-spacing: 0.04em;
 }

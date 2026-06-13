@@ -60,15 +60,15 @@ export function HydrateFallback() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-	let message = "Oops!"
-	let details = "An unexpected error occurred."
+	let message = "エラー"
+	let details = "予期せぬエラーが発生しました。"
 	let stack: string | undefined
 
 	if (isRouteErrorResponse(error)) {
-		message = error.status === 404 ? "404" : "Error"
+		message = error.status === 404 ? "404" : "エラー"
 		details =
 			error.status === 404
-				? "The requested page could not be found."
+				? "お探しのページが見つかりませんでした。"
 				: error.statusText || details
 	} else if (import.meta.env.DEV && error && error instanceof Error) {
 		details = error.message
