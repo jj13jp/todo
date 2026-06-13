@@ -5,6 +5,8 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 import { TodoModule } from "@/todo/todo.module"
 import { Todo } from "@/todo/entities/todo.entity"
 
+const isDevelopment = process.env.NODE_ENV !== "production"
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,7 +17,7 @@ import { Todo } from "@/todo/entities/todo.entity"
       password: process.env.DB_PASSWORD ?? "password",
       database: process.env.DB_NAME ?? "todo",
       entities: [Todo],
-      synchronize: false,
+      synchronize: isDevelopment,
       ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false,
     }),
     TodoModule,

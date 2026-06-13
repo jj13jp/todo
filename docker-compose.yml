@@ -15,6 +15,7 @@ services:
       context: ./be-todo
     environment:
       DB_HOST: postgres
+      NODE_ENV: development
     ports:
       - 3000:3000
     depends_on:
